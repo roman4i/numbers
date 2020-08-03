@@ -22,9 +22,15 @@
             });
 
             function init(){
+                game.num = ranNumber(game.min, game.max);
                 let tempMes = "Welcome to the game. Guess a number for " + game.min + " to " + game.max;
                 message(tempMes, "green");
             }
+
+            function ranNumber(min,max){
+                return Math.floor(Math.random()*(max-min +1)+min);
+            }
+
             function message(mes, clr){
                 game.message.innerHTML = mes;
                 game.message.style.color = clr || "black"; 
