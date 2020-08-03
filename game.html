@@ -23,14 +23,23 @@
             });
 
             function guessValue() {
-                let tempGuess = game.guessInput.value;
-                tempGuess = parseInt(tempGuess);
-                if (isNaN(tempGuess)) {
+                if (game.btn.classList.contains("replay")){
+                    init();
+                    game.btn.innerHTML = "Guess";
+                    game.guessInput.style.display = "block";
+                    game.btn.classList.remove("replay");
+                }
+                else{
+                    game.guesses++;
+                    let tempGuess = game.guessInput.value;
+                    game.guessInput.value = "";
+                    tempGuess = parseInt(tempGuess);
+                    if (isNaN(tempGuess)) {
                     message("Please enter only Digits", "red");
                 }
                 else if (tempGuess === game.num) {
-                    message("Correct your guessed " + game.num, "green");
-                    game.guessInput.style.borderColor = "green";
+                    message("Correct your guessed " + game.num + " in " + game.guesses + "guesses", "green");
+                    gameOver();
                 }
                 else {
                     let holder = tempGuess > game.num ? {
@@ -44,9 +53,17 @@
                     game.guessInput.style.borderColor = holder.c;
                 }
                 console.log(tempGuess);
+                }
+        }
+
+        function gameOver(){
+            game.btn.innerHTML = "Restart Game";
+            game.guessInput.style.display = "none";
+            game.btn.classList.add("replay");
         }
 
             function init(){
+                game.guesses = 0;
                 game.num = ranNumber(game.min, game.max);
                 let tempMes = "Welcome to the game. Guess a number for " + game.min + " to " + game.max;
                 message(tempMes, "green");
@@ -59,6 +76,9 @@
             function message(mes, clr){
                 game.message.innerHTML = mes;
                 game.message.style.color = clr || "black"; 
+                game.guessInput.style.borderColor = clr || "black";
+                game.btn.style.backgroundColor = clr || "black";
+                game.btn.style.color = "white";
             }
 
         </script>
