@@ -23,18 +23,27 @@
             });
 
             function guessValue() {
-            let tempGuess = game.guessInput.value;
-            tempGuess = parseInt(tempGuess);
-            if (isNaN(tempGuess)) {
-                message("Please enter only Digits", "red");
-            }
-            else if (tempGuess === game.num) {
-                message("Correct your guessed " + game.num, "green");
-            }
-            else {
-                message("Not Correct it was " + game.num, "red");
-            }
-            console.log(tempGuess);
+                let tempGuess = game.guessInput.value;
+                tempGuess = parseInt(tempGuess);
+                if (isNaN(tempGuess)) {
+                    message("Please enter only Digits", "red");
+                }
+                else if (tempGuess === game.num) {
+                    message("Correct your guessed " + game.num, "green");
+                    game.guessInput.style.borderColor = "green";
+                }
+                else {
+                    let holder = tempGuess > game.num ? {
+                        "c": "blue"
+                        , "m": "Was Lower"
+                    } : {
+                        "c": "purple"
+                        , "m": "Was Higher"
+                    };
+                    message(holder.m, holder.c);
+                    game.guessInput.style.borderColor = holder.c;
+                }
+                console.log(tempGuess);
         }
 
             function init(){
