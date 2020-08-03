@@ -11,7 +11,7 @@
 
         <script>
 
-            let game = {};
+            let game = {"min":1, "max":10};
             document.addEventListener("DOMContentLoaded", function(){
                 console.log("Ready");
                 game.output = document.querySelector(".output");
@@ -22,7 +22,12 @@
             });
 
             function init(){
-
+                let tempMes = "Welcome to the game. Guess a number for " + game.min + " to " + game.max;
+                message(tempMes, "green");
+            }
+            function message(mes, clr){
+                game.message.innerHTML = mes;
+                game.message.style.color = clr || "black"; 
             }
 
         </script>
