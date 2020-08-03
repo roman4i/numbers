@@ -18,8 +18,24 @@
                 game.message = document.querySelector(".message");
                 game.guessInput = document.querySelector("input");
                 game.btn = document.querySelector("button");
+                game.btn.addEventListener("click", guessValue);
                 init();
             });
+
+            function guessValue() {
+            let tempGuess = game.guessInput.value;
+            tempGuess = parseInt(tempGuess);
+            if (isNaN(tempGuess)) {
+                message("Please enter only Digits", "red");
+            }
+            else if (tempGuess === game.num) {
+                message("Correct your guessed " + game.num, "green");
+            }
+            else {
+                message("Not Correct it was " + game.num, "red");
+            }
+            console.log(tempGuess);
+        }
 
             function init(){
                 game.num = ranNumber(game.min, game.max);
